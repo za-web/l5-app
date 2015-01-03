@@ -1,49 +1,82 @@
-<?php namespace App\Exceptions;
+<?php
+
+namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Psr\Log\LoggerInterface;
+use Illuminate\Contracts\Debug\ExceptionHandler as ExceptionHandlerContract;
 
-class Handler extends ExceptionHandler {
+/**
+ * Class Handler
+ * @package App\Exceptions
+ */
+class Handler implements ExceptionHandlerContract
+{
 
-	/**
-	 * A list of the exception types that should not be reported.
-	 *
-	 * @var array
-	 */
-	protected $dontReport = [
-		'Symfony\Component\HttpKernel\Exception\HttpException'
-	];
+    /**
+     * The log implementation.
+     *
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected $log;
 
-	/**
-	 * Report or log an exception.
-	 *
-	 * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-	 *
-	 * @param  \Exception  $e
-	 * @return void
-	 */
-	public function report(Exception $e)
-	{
-		return parent::report($e);
-	}
+    /**
+     * Create a new exception handler instance.
+     *
+     * @param \Psr\Log\LoggerInterface $log
+     * @return void
+     */
+    public function __construct(LoggerInterface $log)
+    {
 
-	/**
-	 * Render an exception into an HTTP response.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Exception  $e
-	 * @return \Illuminate\Http\Response
-	 */
-	public function render($request, Exception $e)
-	{
-		if ($this->isHttpException($e))
-		{
-			return $this->renderHttpException($e);
-		}
-		else
-		{
-			return parent::render($request, $e);
-		}
-	}
+        $this->log = $log;
+
+    }
+
+    /**
+     * Report or log an exception.
+     *
+     * @param \Exception $e
+     * @return void
+     */
+    public function report(Exception $e)
+    {
+
+        $this->log->error((string)$e);
+
+    }
+
+    /**
+     * Render an exception into a response.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception $e
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function render($request, Exception $e)
+    {
+
+        $whoops = new \Whoops\Run;
+        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
+
+        return new Response($whoops->handleException($e), $e->getStatusCode(), $e->getHeaders());
+
+    }
+
+    /**
+     * Render an exception to the console.
+     *
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @param \Exception $e
+     * @return void
+     */
+    public function renderForConsole($output, Exception $e)
+    {
+
+        $output->writeln((string)$e);
+
+    }
+
 
 }
