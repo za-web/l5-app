@@ -50,20 +50,22 @@ class TableMigrationsGenerator
         if($column->Key == "PRI")
         {
             $type = explode('(', preg_replace('/int/', 'increment', $column->Type ));
-            return '$this->'.$type[0]."('".$column->Field."');\n";
+            $field =  '$this->'.$type[0]."('".$column->Field."');\n";
         }
         else
         {
             
             $type = explode('(', preg_replace($this->columnsPatterns, $this->replaceColumnsTypes, $column->Type));
             
+            $field =  '$this->'.$type[0]."('".$column->Field."');\n";
+
             if(preg_match("/string/", $type[0]))
             {
-                return '$this->'.$type[0]."('".$column->Field."', ".$type[1].";\n";
+                $field = '$this->'.$type[0]."('".$column->Field."', ".$type[1].";\n";
             }
             
-            return '$this->'.$type[0]."('".$column->Field."');\n";
         }
+        return $field;
     }
     
     /**
@@ -95,14 +97,8 @@ class TableMigrationsGenerator
      */
     protected function getStub($stub)
     {
-        $migrateString = "";
         $stub = $this->files->get(__DIR__.'/stubs/'.$stub);
-        foreach($this->getColumns($this->table) as $column)
-        {
-            $migrateString.="    ".$this->replaceTypes($column);
-        }
-        $stub = str_replace("{{columns}}", $migrateString, $stub);
-        return str_replace("{{table}}", $this->table, $stub) ;
+        return $this->replaceStub($stub, ['{{columns}}', '{{table}}'], [$this->getMigrationString(), $this->table]);
     }
     
     /**
@@ -115,9 +111,34 @@ class TableMigrationsGenerator
     protected function writeFile($stub, $name)
     {
         $name = str_replace('\\', DIRECTORY_SEPARATOR, $name);
-        if (!$this->files->exists($fullPath = "database/migrations"."/{$name}"))
+        return $this->files->put( "database/migrations"."/{$name}", $stub);
+        
+    }
+    
+    /**
+     * Get code for migration.
+     * 
+     * @return string
+     */
+    protected function getMigrationString()
+    {
+        $migrateString = "";
+        foreach($this->getColumns($this->table) as $column)
         {
-            return $this->files->put($fullPath, $stub);
+            $migrateString.=$this->replaceTypes($column);
         }
+        return $migrateString;
+    }
+    
+    /**
+     * Get the stub with replacement
+     * 
+     * @param array $vars
+     * @param array $replacement
+     * @return string
+     */
+    protected function replaceStub($stub, array $vars, array $replacement)
+    {
+        return str_replace($vars, $replacement, $stub);
     }
 }
