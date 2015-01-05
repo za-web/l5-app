@@ -7,7 +7,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use App\Console\Commands\TableMigrations\Generators\TableMigrationsGenerator;
 
-class TableMigrations extends Command {
+class TableMigrations extends Command 
+{
 
     /**
      * The console command name.
@@ -28,7 +29,8 @@ class TableMigrations extends Command {
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct() 
+    {
         parent::__construct();
     }
 
@@ -37,8 +39,9 @@ class TableMigrations extends Command {
      *
      * @return mixed
      */
-    public function fire() {
-        $generator = new TableMigrationsGenerator;
+    public function fire()
+    {
+        $generator = new TableMigrationsGenerator($this->argument('table'));
         $generator->make();
     }
 
@@ -58,7 +61,8 @@ class TableMigrations extends Command {
      *
      * @return array
      */
-    protected function getOptions() {
+    protected function getOptions()
+    {
         return [
             ['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
         ];
