@@ -50,22 +50,33 @@ class TableMigrationsGenerator
         if($column->Key == "PRI")
         {
             $type = explode('(', preg_replace('/int/', 'increment', $column->Type ));
-            $field =  '$this->'.$type[0]."('".$column->Field."');\n";
+            $field = '$this->'.$type[0]."('".$column->Field."')";
         }
         else
         {
             
             $type = explode('(', preg_replace($this->columnsPatterns, $this->replaceColumnsTypes, $column->Type));
             
-            $field =  '$this->'.$type[0]."('".$column->Field."');\n";
+            $field =  '$this->'.$type[0]."('".$column->Field."')";
 
             if(preg_match("/string/", $type[0]))
             {
-                $field = '$this->'.$type[0]."('".$column->Field."', ".$type[1].";\n";
+                $field = '$this->'.$type[0]."('".$column->Field."', ".$type[1];
             }
             
         }
-        return $field;
+        if($column->Null == "YES")
+        {
+            $field.="->nullable()";
+        }
+        if(preg_match("/unsigned/", $column->Type))
+        {
+        
+            $field.="->unsigned()";
+        
+        }
+     
+        return $field.";\n";
     }
     
     /**
@@ -141,4 +152,7 @@ class TableMigrationsGenerator
     {
         return str_replace($vars, $replacement, $stub);
     }
+    
+  
+    
 }
