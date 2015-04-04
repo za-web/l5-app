@@ -1,6 +1,0 @@
-#!/bin/bash
-
-echo "Running build in server"
-
-
-php -S localhost:8008 -t ./public

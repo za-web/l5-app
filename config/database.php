@@ -64,6 +64,18 @@ return [
 			'strict'    => false,
 		],
 
+        'soundizer' => [
+            'driver'    => 'mysql',
+            'host'      => '193.164.133.107',
+            'database'  => 'soundizer',
+            'username'  => 'sounduser',
+            'password'  => 'sndusr1',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
 		'pgsql' => [
 			'driver'   => 'pgsql',
 			'host'     => env('DB_HOST', 'localhost'),

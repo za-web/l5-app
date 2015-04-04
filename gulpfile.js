@@ -6,49 +6,41 @@ var elixir = require('laravel-elixir');
  |--------------------------------------------------------------------------
  |
  | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Sass
+ | for your Laravel application. By default, we are compiling the Less
  | file for our application, as well as publishing vendor resources.
  |
  */
 
-elixir(function (mix) {
-    // mix.sass('app.scss');\
-    mix.styles([
-        'public/css/vendor/sticky-footer.css',
-        'public/css/vendor/style.css',
-    ])
-        .version('public/css/all.css')
+/**
+ * Libs
+ */
+elixir(function(mix) {
+    mix.scripts([
+        'components/jquery/dist/jquery.min.js',
+        'components/angular/angular.min.js',
+        'components/angular-resource/angular-resource.min.js',
+        'components/angular-bootstrap/ui-bootstrap.min.js',
+        'components/angular-bootstrap/ui-bootstrap-tpls.min.js'
 
-        .publish(
-        'jquery/dist/jquery.min.js',
-        'public/js/jquery.min.js'
-    )
-        .publish(
-        'jquery/dist/jquery.min.map',
-        'public/js/jquery.min.map'
-    )
-        .publish(
-        'bootstrap/dist/js/bootstrap.min.js',
-        'public/js/bootstrap.min.js'
-    )
-        .publish(
-        'bootstrap/dist/css/bootstrap.min.css',
-        'public/css/bootstrap.min.css'
-    )
-        .publish(
-        'bootstrap/dist/css/bootstrap-theme.min.css',
-        'public/css/bootstrap-theme.min.css'
-    )
-        .publish(
-        'bootstrap/dist/fonts',
-        'public/fonts'
-    )
-        .publish(
-        'font-awesome/css/font-awesome.min.css',
-        'public/css/font-awesome.min.css'
-    )
-        .publish(
-        'font-awesome/fonts',
-        'public/css/fonts'
-    )
+    ], 'public/vendor/js/libs.js', 'public/');
+
+});
+
+/**
+ * App scripts
+ */
+elixir(function(mix) {
+    mix.scriptsIn("public/js/app/", "public/vendor/js/app.js");
+});
+
+/**
+ * All css
+ */
+elixir(function(mix) {
+    mix.styles([
+        'css/normalize.min.css',
+        'css/reset.css',
+        'css/style.css',
+        
+    ], 'public/vendor/css/all.css', 'public/')
 });

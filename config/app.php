@@ -78,7 +78,7 @@ return [
 	|
 	*/
 
-	'key' => env('APP_KEY', '5aYnTINyo0IpBFLrG8K5M3vfYgTGgpuw'),
+	'key' => env('APP_KEY', 'SomeRandomString'),
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -91,7 +91,7 @@ return [
 	| the box, Laravel uses the Monolog PHP logging library. This gives
 	| you a variety of powerful log handlers / formatters to utilize.
 	|
-	| Available Settings: "single", "daily", "syslog"
+	| Available Settings: "single", "daily", "syslog", "errorlog"
 	|
 	*/
 
@@ -110,6 +110,12 @@ return [
 
 	'providers' => [
 
+        'Barryvdh\Debugbar\ServiceProvider',
+        'App\Providers\ErrorServiceProvider',
+        'App\Providers\AppServiceProvider',
+        'App\Providers\EventServiceProvider',
+        'App\Providers\RouteServiceProvider',
+        'App\Providers\AnnotationsServiceProvider',
 		/*
 		 * Laravel Framework Service Providers...
 		 */
@@ -136,6 +142,7 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
+        //'Anouar\Paypalpayment\PaypalpaymentServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -146,13 +153,6 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
-
-        /*
-         * Thirdparty
-         */
-        'Barryvdh\Debugbar\ServiceProvider',
-        //'Way\Generators\GeneratorsServiceProvider'
-        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 	],
 
 	/*
@@ -172,11 +172,13 @@ return [
 		'Artisan'   => 'Illuminate\Support\Facades\Artisan',
 		'Auth'      => 'Illuminate\Support\Facades\Auth',
 		'Blade'     => 'Illuminate\Support\Facades\Blade',
+		'Bus'       => 'Illuminate\Support\Facades\Bus',
 		'Cache'     => 'Illuminate\Support\Facades\Cache',
 		'Config'    => 'Illuminate\Support\Facades\Config',
 		'Cookie'    => 'Illuminate\Support\Facades\Cookie',
 		'Crypt'     => 'Illuminate\Support\Facades\Crypt',
 		'DB'        => 'Illuminate\Support\Facades\DB',
+		'Eloquent'  => 'Illuminate\Database\Eloquent\Model',
 		'Event'     => 'Illuminate\Support\Facades\Event',
 		'File'      => 'Illuminate\Support\Facades\File',
 		'Hash'      => 'Illuminate\Support\Facades\Hash',
@@ -185,7 +187,6 @@ return [
 		'Lang'      => 'Illuminate\Support\Facades\Lang',
 		'Log'       => 'Illuminate\Support\Facades\Log',
 		'Mail'      => 'Illuminate\Support\Facades\Mail',
-		'Paginator' => 'Illuminate\Support\Facades\Paginator',
 		'Password'  => 'Illuminate\Support\Facades\Password',
 		'Queue'     => 'Illuminate\Support\Facades\Queue',
 		'Redirect'  => 'Illuminate\Support\Facades\Redirect',
@@ -195,17 +196,14 @@ return [
 		'Route'     => 'Illuminate\Support\Facades\Route',
 		'Schema'    => 'Illuminate\Support\Facades\Schema',
 		'Session'   => 'Illuminate\Support\Facades\Session',
+		'Storage'   => 'Illuminate\Support\Facades\Storage',
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-        'Form'      => 'Illuminate\Html\FormFacade',
-        'HTML'      => 'Illuminate\Html\HtmlFacade',
+        'Form' => 'Illuminate\Html\FormFacade',
+        'HTML' => 'Illuminate\Html\HtmlFacade',
+        //'Paypalpayment'   => 'Anouar\Paypalpayment\Facades\PaypalPayment',
 
-
-        /*
-         * Thirdpatry
-         */
-        'Debugbar' => 'Barryvdh\Debugbar\Facade',
 	],
 
 ];

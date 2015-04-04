@@ -11,9 +11,7 @@ class Kernel extends ConsoleKernel {
 	 * @var array
 	 */
 	protected $commands = [
-		'App\Console\Commands\InspireCommand',
-            	'App\Console\Commands\TableMigrations\TableMigrations',
-
+		'App\Console\Commands\Inspire',
 	];
 
 	/**

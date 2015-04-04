@@ -3,5 +3,10 @@
 .idea
 node_modules
 composer.lock
-_ide_helper.php
-/public/build
+/public/uploads
+/public/components
+/nbproject/private/
+/public/vendor
+/test/reports
+tests/_output/*
+tests/_output/*
