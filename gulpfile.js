@@ -12,35 +12,33 @@ var elixir = require('laravel-elixir');
  */
 
 /**
- * Libs
+ * Admin js
  */
-elixir(function(mix) {
+elixir(function (mix) {
+
     mix.scripts([
-        'components/jquery/dist/jquery.min.js',
-        'components/angular/angular.min.js',
-        'components/angular-resource/angular-resource.min.js',
-        'components/angular-bootstrap/ui-bootstrap.min.js',
-        'components/angular-bootstrap/ui-bootstrap-tpls.min.js'
+        'public/pub_admin/js/jquery.js',
+        'public/pub_admin/js/bootstrap.min.js',
+        'public/pub_admin/js/plugins/metisMenu/metisMenu.min.js',
+        'public/pub_admin/js/sb-admin-2.js',
+        'public/js/bootbox.min.js',
+        'public/pub_admin/js/plugins/dataTables/jquery.dataTables.js',
+        'public/pub_admin/js/plugins/dataTables/dataTables.bootstrap.js',
 
-    ], 'public/vendor/js/libs.js', 'public/');
+    ], 'public/pub_admin/js/admin.js', 'public');
 
 });
 
 /**
- * App scripts
+ * Admin css
  */
-elixir(function(mix) {
-    mix.scriptsIn("public/js/app/", "public/vendor/js/app.js");
-});
-
-/**
- * All css
- */
-elixir(function(mix) {
+elixir(function (mix) {
     mix.styles([
-        'css/normalize.min.css',
-        'css/reset.css',
-        'css/style.css',
-        
-    ], 'public/vendor/css/all.css', 'public/')
+        'public/pub_admin/css/bootstrap.min.css',
+        'public/pub_admin/css/plugins/metisMenu/metisMenu.min.css',
+        'public/pub_admin/css/plugins/timeline.css',
+        'public/pub_admin/css/sb-admin-2.css',
+        'public/pub_admin/css/plugins/morris.css',
+
+    ], 'public/pub_admin/css/all.css', 'public')
 });

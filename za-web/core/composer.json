@@ -1,0 +1,24 @@
+{
+    "name": "za-web/core",
+    "description": "1",
+    "authors": [
+        {
+            "name": "Aleksandr Zamiatin",
+            "email": "cawa123@mail.ru"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.0.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/database/migrations",
+            "src/views"
+        ],
+        "psr-4": {
+            "ZaWeb\\Core\\": "src/ZaWeb/Core"
+        }
+    },
+    "minimum-stability": "dev"
+}
