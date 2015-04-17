@@ -110,12 +110,11 @@ return [
 
 	'providers' => [
 
+        /**
+         * Debug bar
+         */
         'Barryvdh\Debugbar\ServiceProvider',
-        'App\Providers\ErrorServiceProvider',
-        'App\Providers\AppServiceProvider',
-        'App\Providers\EventServiceProvider',
-        'App\Providers\RouteServiceProvider',
-        'App\Providers\AnnotationsServiceProvider',
+
 		/*
 		 * Laravel Framework Service Providers...
 		 */
@@ -141,8 +140,6 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
-        'Illuminate\Html\HtmlServiceProvider',
-        //'Anouar\Paypalpayment\PaypalpaymentServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -150,10 +147,16 @@ return [
 		'App\Providers\AppServiceProvider',
 		'App\Providers\BusServiceProvider',
 		'App\Providers\ConfigServiceProvider',
-		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
+        'App\Providers\ErrorServiceProvider',
+        'App\Providers\EventServiceProvider',
+        'App\Providers\AnnotationsServiceProvider',
 
-	],
+
+        'Collective\Html\HtmlServiceProvider',
+
+
+    ],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -200,9 +203,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-        'Form' => 'Illuminate\Html\FormFacade',
-        'HTML' => 'Illuminate\Html\HtmlFacade',
-        //'Paypalpayment'   => 'Anouar\Paypalpayment\Facades\PaypalPayment',
+        'Form'      => 'Collective\Html\FormFacade',
+        'Html'      => 'Collective\Html\HtmlFacade',
 
 	],
 
