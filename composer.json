@@ -9,7 +9,7 @@
             "homepage": "http://zamiatin-web.com/",
             "role": "Owner"
         }
-    ]
+    ],
   "license": "MIT",
   "type": "project",
   "require": {
