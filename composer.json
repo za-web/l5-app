@@ -1,7 +1,15 @@
 {
   "name": "za-web/l5-app",
   "description": "Base l5 application for ZaWeb laravel projects.",
-  "keywords": ["framework", "laravel"],
+  "keywords": ["framework", "laravel","za-web","base","skeleton"],
+  "authors": [
+        {
+            "name": "Aleksandr Zamiatin",
+            "email": "cawa123@mail.ru",
+            "homepage": "http://zamiatin-web.com/",
+            "role": "Owner"
+        }
+    ]
   "license": "MIT",
   "type": "project",
   "require": {
